@@ -1,0 +1,2440 @@
+openapi: 3.0.0
+info:
+  title: V1 of Automating Portfolio Manager Workflow
+  version: '1.0'
+  description: Automating Portfolio Manager Workflow
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Accounts
+    description: Operations related to Accounts
+  - name: Locations
+    description: Operations related to Locations
+  - name: Portfolios
+    description: Operations related to Portfolios
+paths:
+  /v1/portfolios/{portfolioId}:
+    parameters:
+      - schema:
+          type: string
+        name: portfolioId
+        description: Id of a Portfolio
+        in: path
+        required: true
+    get:
+      summary: Get Portfolio
+      tags:
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+              examples:
+                Get Portfolio 132:
+                  value:
+                    portfolioId: 132
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '404':
+          description: Portfolio Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-portfolios-portfolioid
+      description: Get the Portfolio by Portfolio Id.
+      x-stoplight:
+        id: 98o0aok0gip07
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: portfolioId
+          description: Id of the Portfolio
+          required: true
+    patch:
+      summary: Update Portfolio
+      operationId: patch-portfolios-portfolioId
+      responses:
+        '200':
+          description: Portfolio Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+              examples:
+                Updated Portfilio Portfolio1:
+                  value:
+                    portfolioId: 13
+                    portfolioName: PortfolioName
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '404':
+          description: Portfolio Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+      description: Update the Portfolio Name of an existing Portfolio.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                portfolioName:
+                  type: string
+                  x-stoplight:
+                    id: xb05hzjlt887s
+            examples: {}
+        description: Update Portfolio by Portfolio Id
+      x-stoplight:
+        id: xb74e8np67qpy
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: portfolioId
+          description: Id of Portfolio
+          required: true
+    delete:
+      summary: Delete Portfolio
+      tags:
+        - Portfolios
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+      operationId: delete-portfolios-portfolioid
+      x-stoplight:
+        id: tsc0fy9ufzppb
+      description: Delete a Portfolio by Portfolio Id
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: 'portfolioId '
+          description: Id of Portfolio
+          required: true
+  /v1/portfolios:
+    post:
+      summary: Create Portfolio
+      operationId: post-portfolio
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Missing Required Information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  portfolioName: string
+              required:
+                - portfolioName
+              properties:
+                portfolioName:
+                  type: string
+                  description: User defined Portfolio Name
+                '':
+                  type: string
+                  x-stoplight:
+                    id: g0olo5l0hpnn6
+            examples:
+              Example 1:
+                value:
+                  portfolioName: PortfolioName
+        description: Create a new Portfolio with user chosen Portfolio Name
+      description: Create a new Portfolio.
+      x-stoplight:
+        id: q4snoddgvpnf5
+    parameters: []
+    get:
+      summary: Get Portfolios
+      tags:
+        - Portfolios
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio'
+                  x-stoplight:
+                    id: 7c9w81c7k6qk4
+              examples:
+                Example 1:
+                  value:
+                    - portfolioId: 142
+                      portfolioName: Alice
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+      operationId: get-portfolios
+      x-stoplight:
+        id: x1as7z45dwk3m
+      description: Enumerate Portfolios
+  /v1/accounts:
+    get:
+      summary: Get Accounts
+      tags:
+        - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+                  x-stoplight:
+                    id: farru4jy0pykq
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+      operationId: get-accounts
+      x-stoplight:
+        id: bqwn8jt36etu3
+      description: Enumerate Accounts
+    post:
+      summary: Create Account
+      tags:
+        - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    x-stoplight:
+                      id: ok3hxhqu1bbdi
+                  accountName:
+                    type: string
+                    x-stoplight:
+                      id: nfwl0s9y1b1nl
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+      operationId: post-accounts
+      x-stoplight:
+        id: xm71dwojrpw6u
+      description: Creates a new Account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountName:
+                  type: string
+                  x-stoplight:
+                    id: yy3xbfgomsfbk
+    parameters: []
+  /v1/accounts/{accountId}:
+    parameters:
+      - schema:
+          type: string
+        name: accountId
+        description: Id of an Account
+        in: path
+        required: true
+    get:
+      summary: Get Account
+      tags:
+        - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                Example 1:
+                  value:
+                    id: '123'
+                    name: AccountName
+                    cedant: 123 Insurance Co
+                    customField1: CustomerField1
+                    customField2: CustomerField2
+                    customField3: CustomerField3
+                    customField4: CustomerField4
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  logId:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        messages:
+                          type: array
+                          items:
+                            type: string
+                x-examples:
+                  Example 1:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+              examples:
+                Example 1:
+                  value:
+                    code: string
+                    message: string
+                    logId: string
+                    details:
+                      - field: string
+                        messages:
+                          - string
+      operationId: get-accounts-accounted
+      x-stoplight:
+        id: cv5qko57lfekk
+      description: Get Account by Account Id
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: accountId
+          description: Id of the Account
+          required: true
+    patch:
+      summary: Update Account
+      tags:
+        - Accounts
+      responses:
+        '200':
+          description: OK
+      operationId: patch-accounts-accounted
+      x-stoplight:
+        id: 2vbh4njdcny60
+      description: Update Account by Account Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountName:
+                  type: string
+                  x-stoplight:
+                    id: 6lk1snmhkmwd1
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: accountId
+          description: Id of the Account
+          required: true
+    delete:
+      summary: Delete Portfolio
+      tags:
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: delete-accounts-accounted
+      x-stoplight:
+        id: spt4kg11gcsdi
+      description: Delete Portfolio by Portfolio Id
+  /v1/locations:
+    get:
+      summary: Get Locations
+      tags:
+        - Locations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+      operationId: get-locations
+      x-stoplight:
+        id: gb2ehv3zkj7yp
+    post:
+      summary: Create Location
+      tags:
+        - Locations
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: post-locations
+      x-stoplight:
+        id: 07fh1o9hkku9j
+      description: Create a Location
+    parameters: []
+  /v1/locations/{locationid}:
+    parameters:
+      - schema:
+          type: string
+        name: locationid
+        description: Id of an Location
+        in: path
+        required: true
+    get:
+      summary: Get Location
+      tags:
+        - Locations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+      operationId: get-locations-locationid
+      x-stoplight:
+        id: 8fyywri2lyidw
+      description: Get Location by Location Id
+    patch:
+      summary: Update Location
+      tags:
+        - Locations
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: patch-locations-locationid
+      x-stoplight:
+        id: h54xyhpoazyyl
+      description: Update Location by Location Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locationName:
+                  type: string
+                  x-stoplight:
+                    id: 48y1nrs3yznma
+                address:
+                  type: string
+                  x-stoplight:
+                    id: 12lk51z9lt9qp
+                latitude:
+                  type: string
+                  x-stoplight:
+                    id: y0nax2s3zx2z4
+                longitude:
+                  type: string
+                  x-stoplight:
+                    id: 571eaknzu6hqr
+                customField1:
+                  type: string
+                  x-stoplight:
+                    id: r7mxlpe8g7wgf
+                customField2:
+                  type: string
+                  x-stoplight:
+                    id: b9lbc9y5wvuth
+                '':
+                  type: string
+                  x-stoplight:
+                    id: 4fsfd3oh1u9w5
+    delete:
+      summary: Delete Location
+      tags:
+        - Locations
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: delete-locations-locationid
+      x-stoplight:
+        id: fq5a558k4pmh1
+      description: Delete Location by Location Id
+  /v1/accounts/{accountId}/locations:
+    parameters:
+      - schema:
+          type: string
+        name: accountId
+        description: Id an Account
+        in: path
+        required: true
+    get:
+      summary: Get Locations Associated with Account
+      tags:
+        - Accounts
+        - Locations
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: get-v1-accounts-accountId-locations
+      x-stoplight:
+        id: cllbteowfqbhu
+      description: Get Locations Associated with Account by Account Id
+    delete:
+      summary: Delete Locations Associated with Account
+      tags:
+        - Accounts
+        - Locations
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: delete-v1-accounts-accountId-locations
+      x-stoplight:
+        id: lv0gpsshz4nya
+      description: Delete Location Associated with Account by Account Id
+    post:
+      summary: Associate Location with Account
+      tags:
+        - Accounts
+        - Locations
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: post-v1-accounts-accountId-locations
+      x-stoplight:
+        id: 0j4vgn5j36den
+      description: Associate a Location with an Account by Account Id
+  /v1/portfolios/{portfolioId}/accounts:
+    parameters:
+      - schema:
+          type: string
+        name: portfolioId
+        description: Id of a Portfolio
+        in: path
+        required: true
+    get:
+      summary: Get Accounts Associated with Portfolio
+      tags:
+        - Accounts
+        - Portfolios
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+      operationId: get-v1-portfolios-portfolioId-accounts
+      x-stoplight:
+        id: 935zwmkwhhhkg
+      description: 'Get Accounts Associated with Portfolio by Portfolio Id '
+    delete:
+      summary: Delete Account Associated with Portfolio Id
+      tags:
+        - Accounts
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: delete-v1-portfolios-portfolioId-accounts
+      x-stoplight:
+        id: xryxcg7xh1xn9
+      description: Delete an Account associated with a Portfolio Id
+    post:
+      summary: Associate Account with a Portfolio
+      tags:
+        - Accounts
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: post-v1-portfolios-portfolioId-accounts
+      x-stoplight:
+        id: wap8slyoeu21l
+      description: Associate an Account with a Portfolio
+  /v1/portfolios/{portfolioId}/accumulations:
+    parameters:
+      - schema:
+          type: string
+        name: portfolioId
+        description: Id of a Portfolio
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: get-v1-portfolios-portfolioId-accumulations
+      x-stoplight:
+        id: 0zsh0eopmdzxg
+    post:
+      summary: Accumulation on Portfolio
+      tags:
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: post-v1-portfolios-portfolioId-accumulations
+      x-stoplight:
+        id: sjnrms0o4b5kx
+      description: Accumulation on a Portfolio
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: portfolioId
+          description: Id of the Portfolio
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - GeoPolitical
+                    - Hazard
+                    - CircleSpider
+                    - GeoPoliticalSpider
+                  description: Type of accumulation
+                peril:
+                  type: string
+                  enum:
+                    - Earthquake
+                    - Fire
+                    - Flood
+                  description: Peril associated with the accumulation
+                resolution:
+                  type: string
+                  enum:
+                    - Country
+                    - State
+                    - ZIP
+                  description: Resolution level of the accumulation
+                name:
+                  type: string
+                  description: Optional name for the accumulation result
+  /v1/accumulations:
+    get:
+      summary: Get Accumulations
+      tags:
+        - Accounts
+        - Locations
+        - Portfolios
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accumulation'
+      operationId: get-v1-accumulations
+      x-stoplight:
+        id: pz8fgj3q919bw
+  /v1/accumulations/{accumulationId}:
+    parameters:
+      - schema:
+          type: string
+        name: accumulationId
+        description: Id of an Accumulation
+        in: path
+        required: true
+    delete:
+      summary: Delete Accumulation
+      tags:
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: delete-v1-accumulations-id
+      x-stoplight:
+        id: tnn9zf7zcbdlu
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id
+          description: Accumulation Id
+  /v1/accumulations/{accumulationId}/download:
+    parameters:
+      - schema:
+          type: string
+        name: accumulationId
+        description: Id of an Accumulation
+        in: path
+        required: true
+    get:
+      summary: Download Accumulation
+      description: Downloads an Accumulation result in VCS or Parquet
+      tags:
+        - Portfolios
+      responses:
+        '200':
+          description: Portfolio successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Portfolio deleted successfully
+      operationId: get-v1-accumulations-id-download
+      x-stoplight:
+        id: x9rz9xxvbpvdv
+components:
+  schemas:
+    Portfolio:
+      title: Portfolio
+      type: object
+    Account:
+      title: Account
+      x-stoplight:
+        id: nm2ezllb253b2
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 9h7rhkxspylvc
+          description: Unique identifier auto generated for the given Account.
+        accountName:
+          type: string
+          x-stoplight:
+            id: 93hkqebcy8f90
+          description: User defined name given for Account
+        cedant:
+          type: string
+          x-stoplight:
+            id: fo2wg4g9owb39
+          description: Cedant associated with an Account
+        customField1:
+          type: string
+          x-stoplight:
+            id: 4xz1vrpimul2a
+          description: Customer Field 1 Associated with an Account
+        customField2:
+          type: string
+          x-stoplight:
+            id: nqyqdhxcbjhpo
+          description: Customer Field 2 Associated with an Account
+        customField3:
+          type: string
+          x-stoplight:
+            id: pz3poimkc3bfo
+          description: Customer Field 3 Associated with an Account
+        customField4:
+          type: string
+          x-stoplight:
+            id: dxcjt8ke5ui1e
+          description: Customer Field 4 Associated with an Account
+    Location:
+      title: Location
+      x-stoplight:
+        id: o7tj06b0cp1jk
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: xpgen7xcmxu5t
+        name:
+          type: string
+          x-stoplight:
+            id: 3ioisx9tbzmig
+        address:
+          type: string
+          x-stoplight:
+            id: vhhwqep96e30x
+        latitude:
+          type: string
+          x-stoplight:
+            id: iwzut2q9biqay
+        longitude:
+          type: string
+          x-stoplight:
+            id: d3jsvftqn4pp4
+        customField1:
+          type: string
+          x-stoplight:
+            id: a6miyw2r899gq
+        customField2:
+          type: string
+          x-stoplight:
+            id: ryr7ap9myq7fu
+    Accumulation:
+      title: Accumulation
+      x-stoplight:
+        id: hkpxxramtoij1
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: xq5s1dwndl9ln
+        porfolioId:
+          type: string
+          x-stoplight:
+            id: m4caxikudbgla
+        type:
+          x-stoplight:
+            id: 9rsub7ul48gjy
+          enum:
+            - GeoPolitical
+            - Hazard
+            - CircleSpider
+            - GeoPoliticalSpider
+        peril:
+          x-stoplight:
+            id: 1et7l0d9rd8i0
+          enum:
+            - Earthquake
+            - Fire
+            - Floor
+        resolution:
+          x-stoplight:
+            id: ziv1q7fd391gc
+          enum:
+            - Country
+            - State
+            - ZIP
+        nameOfResult:
+          type: string
+          x-stoplight:
+            id: crjrnb4qgvxmm
+  responses:
+    ErrorResponseBody:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              logId:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                    messages:
+                      type: array
+                      items:
+                        type: string
+            x-examples:
+              Example 1:
+                code: string
+                message: string
+                logId: string
+                details:
+                  - field: string
+                    messages:
+                      - string
+          examples:
+            Example 1:
+              value:
+                code: string
+                message: string
+                logId: string
+                details:
+                  - field: string
+                    messages:
+                      - string
